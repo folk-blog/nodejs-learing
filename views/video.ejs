@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>0515</title>
+    <link rel="stylesheet" href="css/video.css">
+</head>
+<body>
+
+
+<video src="mp4/<%=list[0]%>" controls="controls" id="source">
+    您的浏览器不支持 video 标签。
+</video>
+<div id="box">
+
+    <% for(var i=0;i<list.length;i++){%>
+    <div class="<%= i==0?'cur':''%>"><%= list[i] %></div>
+    <% }%>
+</div>
+<script>
+
+    var box = document.getElementById('box');
+    var chids = box.children;
+    var mp4 = [];
+    for(var i=0;i<chids.length;i++){
+        mp4.push(chids[i].textContent);
+    }
+    console.log(mp4);
+    var source = document.getElementById('source');
+    box.addEventListener('click', function(ev){
+        for(var i=0;i<chids.length;i++){
+            chids[i].classList.remove('cur');
+            if(ev.target==chids[i]){
+                source.src = 'mp4/'+mp4[i];
+                ev.target.classList.add('cur');
+            }
+        }
+    },false);
+</script>
+</body>
+</html>
